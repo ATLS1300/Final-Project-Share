@@ -1,0 +1,91 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+'''b.	Create three separate tuples that represent each dataset (Body, Face, Hand) and assign each a different color. and font type 
+i.	Each of these will act like an object later on in the code. 
+c.	Use the for loop and the range functions to index through each tuple to send  and print each word (write function) to a random location on the screen. 
+i.	The font size of each word will increase as it goes through the range. 
+ 
+
+Turtle starter code
+ATLS 1300
+Author: Dr. Z
+Author: Jessica Tebo
+July 3, 2022
+'''
+
+import turtle 
+import random
+
+turtle.colormode(255)
+
+
+panel = turtle.Screen()
+# this assures that the size of the screen will always be 400x400 ...
+
+w=600
+h=600
+panel.setup(width=w, height=h)
+# ... which is the same size as our image
+# now set the background to our space image
+panel.bgcolor("black")
+image= "Finalproject.gif"
+panel.bgpic(image)
+#I adapted this image to be black and white to create a greater, and more visible contrast, against the  colorful lettering. 
+#the image choses is of the statue "Virginia Dare," created by Louisa Lander in the nineteenth century. I chose this image because it was a remarkable and controversial piece when it was first created. It differs from the more traditional "captive" statue in that the figure is confident in her body and it's nakedness
+#=======Add your code here======
+#define variables
+
+y = random.randrange(-h/2, h/2)
+x = random.randrange(-w/2, w/2)
+print(x) 
+print(y)
+#used the print function to check and make sure that random integers are being generated
+
+
+Body = ['walk','form','figure', 'walking', 'run','bearing','step', 'riding', 'ride', 'frame','body', 'ran', 'move', 'leg','exercise', 'foot', 'horseback', 'feet', 'bodily', 'profile','stature', 'wander', 'gait', 'leap','muscle', 'ramble']
+Face = ['eyes','face', 'head', 'smile', 'hair', 'expression','smiling', 'pale', 'neck', 'mouth', 'chin','cheek', 'complexion','lip', 'nose','features', 'blush', 'forehead','frown','eyelid']
+Hand = ['hand', 'held','carry','arm', 'write', 'hold', 'finger', 'shake', 'elbow','grasp', 'handle', 'cling', 'handling', 'palm', 'thumb', 'sew', 'caress','limb', 'glove', 'wrist']
+Parts = list([Body, Face, Hand])
+fonts =["arial", "century gothic", "rockwell"]
+#all of the fonts chosen are accessible
+color=["yellow green", "midnight blue", "powder blue" ]
+#I generated this palette using the adobe colorblind-safe color wheel: https://color.adobe.com/create/color-accessibility
+
+#===============generated a class, used the init method, and defined a method using a nested for loop that runs through my lists of keywords ==============================================
+class wordArt(turtle.Turtle):
+
+  
+    def __init__(self, shade,fonts="arial", fontSize=70):
+        self.shade = shade
+        self.fonts = fonts
+        self.fontSize= fontSize
+        super(wordArt,self).__init__()
+    def writing (self):
+        for k in Parts:
+            for i in range(len(k)):
+                y = random.randrange(-h/2, h/2)
+                x = random.randrange(-w/2, w/2)
+                self.up()
+                self.goto(x,y)
+                self.down()
+                self.color(self.shade)
+                self.write(k[i], move=False, align='left', font=("fonts", self.fontSize,"bold"))
+                self.fontSize -=1
+                self.up()
+                self.hideturtle()
+
+#i=========instantiate objects===============================================================
+Body= wordArt("yellow green", "arial")
+Face= wordArt("midnight blue", "century gothic")
+Hand= wordArt("powder blue", "rockwell")
+
+
+Body.writing()
+Face.writing()
+Hand.writing()
+
+turtle.done()
+
+
+               
